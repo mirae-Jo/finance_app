@@ -10,7 +10,7 @@ export default function Home() {
   const callRealStockBtn = async () => {
     const data = await fetchStock();
 
-    if (data["Global Quoto"]) {
+    if (data["Global Quote"]) {
       setState(data);
     } else if (data.Information || data.Note || data["Error Message"]) {
       console.log("API 오류 응답: ", data);
@@ -22,7 +22,7 @@ export default function Home() {
   return (
     <div>
       <button onClick={callRealStockBtn}>실제 데이터</button>
-      {state}
+      {state ? <div>{JSON.stringify(state)}</div> : <p>데이터 없음</p>}
     </div>
   );
 }
