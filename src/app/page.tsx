@@ -42,10 +42,14 @@ export default function Home() {
   }, []);
 
   return (
-    <div className='w-full p-5'>
-      <p>{updateTime} 업데이트</p>
-
-      <Main state={state} />
+    <div className='w-full'>
+      <h1 className='text-3xl px-10 py-3 border-b-2 bg-white'>
+        주식 시세 대시보드
+      </h1>
+      <div className='w-full px-10 pt-3'>
+        <p className='text-right pb-3 text-[#777]'>{updateTime} 업데이트</p>
+        <Main state={state} />
+      </div>
     </div>
   );
 }
