@@ -1,28 +1,72 @@
 "use client";
 
-import mock from "@/app/lib/mock.json";
-import { fetchStock } from "./lib/api/stock";
-import { useState } from "react";
+// import { fetchStock } from "./lib/api/stock";
+import { useEffect, useState } from "react";
+import { getStockData } from "./action";
+import {
+  Card,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+
+type Quote = {
+  symbol: string;
+  name: string;
+  price: number;
+  change: number;
+  changePercent: number;
+};
 
 export default function Home() {
-  const [state, setState] = useState(JSON.stringify(mock));
+  const [state, setState] = useState<Quote[]>();
+  const [updateTime, setUpdateTime] = useState("0");
 
-  const callRealStockBtn = async () => {
-    const data = await fetchStock();
+  const callStockData = async () => {
+    const data = await getStockData([
+      "AAPL",
+      "TSLA",
+      "MSFT",
+      "AMZN",
+      "META",
+      "GOOGL",
+    ]);
 
-    if (data["Global Quote"]) {
-      setState(data);
-    } else if (data.Information || data.Note || data["Error Message"]) {
-      console.log("API 오류 응답: ", data);
-    } else {
-      console.log("예상치 못한 응답 형식: ", data);
-    }
+    const now = new Date(); // 객체 인스턴스
+
+    setUpdateTime(now.toLocaleTimeString("ko-KR"));
+    setState(data);
   };
 
+  useEffect(() => {
+    callStockData();
+
+    const intervalId = setInterval(callStockData, 600000);
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
+
   return (
-    <div>
-      <button onClick={callRealStockBtn}>실제 데이터</button>
-      {state ? <div>{JSON.stringify(state)}</div> : <p>데이터 없음</p>}
+    <div className='w-full p-5'>
+      <p>{updateTime} 업데이트</p>
+
+      <div className='w-full grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3'>
+        {state?.map((Quote) => (
+          <Card key={Quote.name}>
+            <CardHeader>
+              <CardTitle>{Quote.symbol}</CardTitle>
+              <CardDescription>{Quote.name}</CardDescription>
+            </CardHeader>
+            <CardFooter>
+              <p>{Quote.price}$</p>
+              <span>({Math.round(Quote.changePercent * 100) / 100}%)</span>
+            </CardFooter>
+          </Card>
+        ))}
+      </div>
     </div>
   );
 }
