@@ -3,15 +3,10 @@
 // import { fetchStock } from "./lib/api/stock";
 import { useEffect, useState } from "react";
 import { getStockData } from "./action";
-import {
-  Card,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 
-type Quote = {
+import Main from "@/components/Main";
+
+export type Quote = {
   symbol: string;
   name: string;
   price: number;
@@ -20,8 +15,8 @@ type Quote = {
 };
 
 export default function Home() {
-  const [state, setState] = useState<Quote[]>();
-  const [updateTime, setUpdateTime] = useState("0");
+  const [state, setState] = useState<Quote[]>([]);
+  const [updateTime, setUpdateTime] = useState<string>();
 
   const callStockData = async () => {
     const data = await getStockData([
@@ -33,40 +28,24 @@ export default function Home() {
       "GOOGL",
     ]);
 
-    const now = new Date(); // 객체 인스턴스
+    if (!data) return;
 
-    setUpdateTime(now.toLocaleTimeString("ko-KR"));
-    setState(data);
+    setUpdateTime(new Date(data.updateAt).toLocaleTimeString("ko-KR"));
+    setState(data.data);
+
+    const nextRefresh = 3600_000 - (Date.now() - data.updateAt);
+    setTimeout(callStockData, nextRefresh);
   };
 
   useEffect(() => {
     callStockData();
-
-    const intervalId = setInterval(callStockData, 600000);
-
-    return () => {
-      clearInterval(intervalId);
-    };
   }, []);
 
   return (
     <div className='w-full p-5'>
       <p>{updateTime} 업데이트</p>
 
-      <div className='w-full grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3'>
-        {state?.map((Quote) => (
-          <Card key={Quote.name}>
-            <CardHeader>
-              <CardTitle>{Quote.symbol}</CardTitle>
-              <CardDescription>{Quote.name}</CardDescription>
-            </CardHeader>
-            <CardFooter>
-              <p>{Quote.price}$</p>
-              <span>({Math.round(Quote.changePercent * 100) / 100}%)</span>
-            </CardFooter>
-          </Card>
-        ))}
-      </div>
+      <Main state={state} />
     </div>
   );
 }
