@@ -1,36 +1,24 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## 기술스택
 
-## Getting Started
+### 프론트엔드 프레임워크
 
-First, run the development server:
+    •	Next.js
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Language
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+    •	TypeScript
+    •	안정적인 코드 작성과 유지보수를 지원
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### UI / Styling
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+    •	Tailwind CSS
+    •	shadcn/ui
+    •	lucide-react
 
-## Learn More
+### Package Manager & Build Tools
 
-To learn more about Next.js, take a look at the following resources:
+    •	npm
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 버전 관리
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+    •	Git
