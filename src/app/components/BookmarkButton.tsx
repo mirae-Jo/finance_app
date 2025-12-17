@@ -19,7 +19,9 @@ export default function BookmarkButton({ symbol }: Props) {
   const isMark = bookmarks.includes(symbol);
 
   return (
-    <button onClick={() => toggleBookmark(symbol)}>
+    <button
+      style={{ cursor: "pointer" }}
+      onClick={() => toggleBookmark(symbol)}>
       <Image
         // 즐겨찾기 상태에 따라 이미지를 바꾸거나 스타일을 줍니다.
         // (지금은 이미지가 하나뿐이니, isFavorite일 때 css filter 등을 주거나 이미지를 교체해야 함)
