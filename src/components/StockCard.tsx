@@ -13,18 +13,17 @@ import { ReactNode } from "react";
 
 interface Props {
   stock: Quote;
-  action?: ReactNode;
+  children: ReactNode;
 }
 
-export default function StockCard({ stock, action }: Props) {
+export default function StockCard({ stock, children }: Props) {
   return (
     <Card>
       <CardHeader>
         <CardTitle>{stock.symbol}</CardTitle>
         <CardDescription>{stock.name}</CardDescription>
 
-        {/* ✨ 여기가 핵심입니다. 부모가 넣어준 버튼을 그대로 렌더링합니다. */}
-        <CardAction>{action}</CardAction>
+        <CardAction>{children}</CardAction>
       </CardHeader>
 
       <CardFooter>

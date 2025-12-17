@@ -19,12 +19,9 @@ const Bookmark = () => {
   return (
     <div className='w-full grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3'>
       {myStocks.map((stock) => (
-        <StockCard
-          key={stock.symbol}
-          stock={stock}
-          // 이걸 누르면 즐겨찾기가 해제되면서 이 목록에서 사라짐
-          action={<BookmarkButton symbol={stock.symbol} />}
-        />
+        <StockCard key={stock.symbol} stock={stock}>
+          <BookmarkButton symbol={stock.symbol} />
+        </StockCard>
       ))}
     </div>
   );
