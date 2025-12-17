@@ -3,8 +3,8 @@
 // import { fetchStock } from "./lib/api/stock";
 import { useEffect } from "react";
 
-import Main from "@/components/Main";
-import Bookmark from "@/components/Bookmark";
+import Main from "@/app/components/Main";
+import Bookmark from "@/app/components/Bookmark";
 import { TrendingUp } from "lucide-react";
 import { useStockStore } from "./lib/store/useStockStore";
 

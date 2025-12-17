@@ -3,8 +3,8 @@
 import { useStockStore } from "@/app/lib/store/useStockStore";
 import Image from "next/image";
 // 꽉 찬 별(북마크) 이미지도 필요합니다. 일단 있는 거랑, 가상의 이미지를 쓴다고 가정할게요.
-import unBookmarkIcon from "../../public/bookmark_border_24dp_C5C016.svg";
-import BookmarkIcon from "../../public/bookmark_24dp_EDE60C.svg";
+import unBookmarkIcon from "../../../public/bookmark_border_24dp_C5C016.svg";
+import BookmarkIcon from "../../../public/bookmark_24dp_EDE60C.svg";
 
 interface Props {
   symbol: string;
