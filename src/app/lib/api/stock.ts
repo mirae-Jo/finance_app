@@ -1,3 +1,5 @@
+// 알파빈티지 api 호출
+
 export async function fetchStock() {
   const response = await fetch(
     `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=IBM&apikey=${process.env.NEXT_PUBLIC_ALPHA_VANTAGE_API_KEY}`
